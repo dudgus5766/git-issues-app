@@ -6,6 +6,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/Home';
 import SearchResultScreen from '../screens/SearchResult';
 import MyRepositoryScreen from '../screens/MyRepository';
+import Icon from '../components/common/Icon';
+import IconAssets from '../assets/icons/IconAssets';
+import { COLORS } from '../constants/Colors';
+import TabBtnHomeSelected from '../assets/icons/tabBtnHome/tabBtnHomeSelected.png';
 
 /**
  * [ Navigation ]
@@ -50,12 +54,44 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name={'Home'}
         component={HomeScreen}
-        options={{ tabBarLabel: '홈' }}
+        options={{
+          tabBarLabel: '홈',
+          tabBarActiveTintColor: COLORS.MAIN_BLACK,
+          tabBarInactiveTintColor: COLORS.SUB_GREY_02,
+          tabBarLabelStyle: {
+            fontSize: 12,
+          },
+          tabBarIcon: ({ focused }) => (
+            <Icon
+              iconSource={
+                focused ? IconAssets.TabBtnHomeSelected : IconAssets.TabBtnHome
+              }
+              iconSize={40}
+            />
+          ),
+        }}
       />
       <BottomTab.Screen
         name={'MyRepository'}
         component={MyRepositoryScreen}
-        options={{ tabBarLabel: '레포지토리' }}
+        options={{
+          tabBarLabel: '내 레포지토리',
+          tabBarActiveTintColor: COLORS.MAIN_BLACK,
+          tabBarInactiveTintColor: COLORS.SUB_GREY_02,
+          tabBarLabelStyle: {
+            fontSize: 12,
+          },
+          tabBarIcon: ({ focused }) => (
+            <Icon
+              iconSource={
+                focused
+                  ? IconAssets.TabBtnProfileSelected
+                  : IconAssets.TabBtnProfile
+              }
+              iconSize={40}
+            />
+          ),
+        }}
       />
     </BottomTab.Navigator>
   );

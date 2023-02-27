@@ -8,7 +8,8 @@ import {
 } from 'react-native';
 
 import SearchBar from '../../components/common/SearchBar';
-import { CenteredContainer } from './styled';
+import { CenteredContainer, GithubImg } from './styled';
+import { ImageAssets } from '../../assets';
 
 /**
  * [ 홈 화면 ]
@@ -21,6 +22,10 @@ export default function HomeScreen() {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <CenteredContainer>
+          <GithubImg
+            source={ImageAssets.GithubCharacterImage}
+            resizeMode={'contain'}
+          />
           <SearchBar />
         </CenteredContainer>
       </TouchableWithoutFeedback>
