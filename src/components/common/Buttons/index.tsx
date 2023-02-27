@@ -16,7 +16,7 @@ type IconButtonProps = {
   iconSize?: number;
 };
 
-function IconButton(props: IconButtonProps) {
+export default function IconButton(props: IconButtonProps) {
   return (
     <IconButtonContainer>
       <Pressable onPress={props.onPress}>
@@ -25,5 +25,3 @@ function IconButton(props: IconButtonProps) {
     </IconButtonContainer>
   );
 }
-
-export default IconButton;

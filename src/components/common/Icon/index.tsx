@@ -6,7 +6,7 @@ type Props = {
   iconSize?: number;
 };
 
-function Icon(props: Props) {
+export default function Icon(props: Props) {
   const { iconSource, iconSize } = props;
 
   return (
@@ -15,5 +15,3 @@ function Icon(props: Props) {
     </IconContainer>
   );
 }
-
-export default Icon;
