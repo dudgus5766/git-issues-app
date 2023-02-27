@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useFocusEffect } from 'react';
 import {
   Keyboard,
   Text,
@@ -14,6 +14,8 @@ import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { CompositeScreenProps } from '@react-navigation/native';
 import { BottomTabParamList, RootStackParamList } from '../../../types';
+import { useSetRecoilState } from 'recoil';
+import { searchWordState } from '../../atom/search';
 
 type HomeScreenNavigationProps = CompositeScreenProps<
   BottomTabScreenProps<BottomTabParamList, 'Home'>,
@@ -24,10 +26,19 @@ type HomeScreenNavigationProps = CompositeScreenProps<
  * [ 홈 화면 ]
  */
 export default function HomeScreen({ navigation }: HomeScreenNavigationProps) {
+  const setSearchWord = useSetRecoilState(searchWordState);
+
   // searchBar에서 submit됐을 때 호출하는 함수
   const onSubmitEditing = () => {
     navigation.push('SearchResult');
   };
+
+  // 홈으로 돌아오면 searchWord 초기화
+  useFocusEffect(
+    React.useCallback(() => {
+      setSearchWord('');
+    }, []),
+  );
 
   return (
     <KeyboardAvoidingView
