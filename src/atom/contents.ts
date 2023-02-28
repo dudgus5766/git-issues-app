@@ -1,10 +1,11 @@
 import { atom } from 'recoil';
+import { RepositoryType } from '../types';
 
 /**
  * 콘텐츠 atom
  */
 interface ContentsState {
-  items: any;
+  items: RepositoryType[] | null;
   totalCount: number;
 }
 

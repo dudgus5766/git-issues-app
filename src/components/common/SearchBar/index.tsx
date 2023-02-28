@@ -6,6 +6,7 @@ import { SearchBarContainer, SearchInput } from './styled';
 import IconAssets from '../../../assets/icons/IconAssets';
 import { useRecoilState } from 'recoil';
 import { searchWordState } from '../../../atom/search';
+import { COLORS } from '../../../constants/Colors';
 
 type SearchBarProps = {
   onSubmitEditing: () => void;
@@ -32,6 +33,7 @@ export default function SearchBar({ onSubmitEditing }: SearchBarProps) {
         onBlur={() => setIsFocused(false)}
         value={searchWord}
         onChangeText={setSearchWord}
+        placeholderTextColor={COLORS.SUB_GREY_03}
         onSubmitEditing={onSubmitEditing}
       />
       {searchWord && (

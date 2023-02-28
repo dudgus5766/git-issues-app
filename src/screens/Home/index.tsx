@@ -1,4 +1,4 @@
-import React, { useFocusEffect } from 'react';
+import React, { useCallback } from 'react';
 import {
   Keyboard,
   Text,
@@ -6,13 +6,12 @@ import {
   Platform,
   TouchableWithoutFeedback,
 } from 'react-native';
-
 import SearchBar from '../../components/common/SearchBar';
 import { CenteredContainer, GithubImg } from './styled';
 import { ImageAssets } from '../../assets';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { CompositeScreenProps } from '@react-navigation/native';
+import { CompositeScreenProps, useFocusEffect } from '@react-navigation/native';
 import { BottomTabParamList, RootStackParamList } from '../../../types';
 import { useSetRecoilState } from 'recoil';
 import { searchWordState } from '../../atom/search';
@@ -35,7 +34,7 @@ export default function HomeScreen({ navigation }: HomeScreenNavigationProps) {
 
   // 홈으로 돌아오면 searchWord 초기화
   useFocusEffect(
-    React.useCallback(() => {
+    useCallback(() => {
       setSearchWord('');
     }, []),
   );

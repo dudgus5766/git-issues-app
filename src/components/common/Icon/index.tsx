@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { IconContainer, IconImage } from './styled';
+import { IconSourceType } from '../../../types';
 
 type Props = {
-  iconSource: any;
+  iconSource: IconSourceType;
   iconSize?: number;
 };
 
