@@ -7,6 +7,7 @@ import useContents from '../../hooks/useContents';
 import Header from '../../components/Header';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../types';
+import ContentsList from '../../components/ContentsList';
 
 type SearchResultScreenNavigationProps = NativeStackScreenProps<
   RootStackParamList,
@@ -36,6 +37,7 @@ export default function SearchResultScreen({
   return (
     <Container>
       <Header handleGoBack={onHandleGoBack} />
+      <ContentsList data={data.items} />
     </Container>
   );
 }

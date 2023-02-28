@@ -92,8 +92,8 @@ export function SearchBar(props: SearchBarProps) {
       style={[
         {
           backgroundColor: COLORS.MAIN_WHITE,
-          borderColor: isFocused ? COLORS.MAIN_BLUE : COLORS.SUB_GREY_02,
-          borderWidth: isFocused ? 1.5 : 1,
+          borderColor: isFocused ? COLORS.MAIN_BLUE : COLORS.SUB_GREY_03,
+          borderWidth: 1,
         },
         style,
       ]}
