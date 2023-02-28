@@ -8,17 +8,18 @@ import { getRepository } from '../api/getContents';
 
 export default function useContents(props: ContentsQuery) {
   const { query, per_page, page } = props;
-  console.log('props>>>', props);
   const [data, set] = useRecoilState(contentsState);
-  console.log('data', data);
+
+  const isLastPage = (totalCount: number, perPage: number, page: number) => {
+    return totalCount <= perPage * page;
+  };
+
   const fetchData = useCallback(async () => {
     set({
       items: null,
       totalCount: 0,
+      isLastPage: false,
     });
-
-    console.log('refetch!!!!!!!>>>');
-    console.log('query!!!!!!!>>>', query);
 
     try {
       const response = await getRepository({
@@ -27,11 +28,10 @@ export default function useContents(props: ContentsQuery) {
         page,
       });
 
-      console.log('response>>>', response);
-
       set({
         items: response.data.items,
         totalCount: response.data.total_count,
+        isLastPage: isLastPage(response.data.total_count, per_page, page),
       });
     } catch (e) {
       const error = e as Error | AxiosError;
@@ -46,6 +46,7 @@ export default function useContents(props: ContentsQuery) {
       set({
         items: null,
         totalCount: 0,
+        isLastPage: false,
       });
     }
   }, [set]);

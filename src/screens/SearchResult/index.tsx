@@ -1,14 +1,24 @@
 import React from 'react';
 import { Text } from 'react-native';
 import { Container } from '../../components/common/CommonStyled';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { searchWordState } from '../../atom/search';
 import useContents from '../../hooks/useContents';
+import Header from '../../components/Header';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../../types';
+
+type SearchResultScreenNavigationProps = NativeStackScreenProps<
+  RootStackParamList,
+  'SearchResult'
+>;
 
 /**
  * [ 검색 결과 화면 ]
  */
-export default function SearchResultScreen() {
+export default function SearchResultScreen({
+  navigation,
+}: SearchResultScreenNavigationProps) {
   const searchWord = useRecoilValue(searchWordState);
 
   const { data } = useContents({
@@ -17,11 +27,15 @@ export default function SearchResultScreen() {
     page: 0,
   });
 
-  console.log('data>>>', data);
+  const onHandleGoBack = () => {
+    if (navigation.canGoBack()) {
+      navigation.goBack();
+    }
+  };
 
   return (
     <Container>
-      <Text>{'Search Result'}</Text>
+      <Header handleGoBack={onHandleGoBack} />
     </Container>
   );
 }

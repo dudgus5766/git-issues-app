@@ -6,7 +6,11 @@ import Navigation from './navigation';
 export default function App() {
   return (
     <SafeAreaProvider>
-      <StatusBar />
+      <StatusBar
+        barStyle={'dark-content'}
+        backgroundColor={'transparent'}
+        translucent={true}
+      />
       <RecoilRoot>
         <Navigation />
       </RecoilRoot>
