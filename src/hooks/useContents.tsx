@@ -28,6 +28,7 @@ export default function useContents(props: ContentsQuery) {
         per_page,
         page,
       });
+
       if (page === 1) {
         set({
           items: response.data.items,

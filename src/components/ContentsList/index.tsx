@@ -3,6 +3,7 @@ import { FlatList, ListRenderItem } from 'react-native';
 
 import { RepositoryType } from '../../types';
 import ContentsItem from './ContentsItem';
+import { EmptyText, EmptyTextContainer } from '../../screens/Issues/styled';
 
 type ContentsListProps = {
   data: RepositoryType[] | null;
@@ -21,7 +22,11 @@ export default function ContentsList(props: ContentsListProps) {
     [],
   );
 
-  const getItemLayout = () => {};
+  const listEmptyComponent = () => (
+    <EmptyTextContainer>
+      <EmptyText>{'검색된 repository가 없습니다.'}</EmptyText>
+    </EmptyTextContainer>
+  );
 
   return (
     <FlatList
@@ -31,8 +36,8 @@ export default function ContentsList(props: ContentsListProps) {
       renderItem={renderItem}
       keyExtractor={keyExtractor}
       contentContainerStyle={{ marginTop: 5 }}
-      // getItemLayout={getItemLayout}
       onEndReached={onLoadMore}
+      ListEmptyComponent={listEmptyComponent}
     />
   );
 }

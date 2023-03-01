@@ -1,5 +1,3 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-
 import { NavigatorScreenParams } from '@react-navigation/native';
 
 declare global {
@@ -17,6 +15,3 @@ export type BottomTabParamList = {
   Home: undefined;
   Issues: undefined;
 };
-
-export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
-  NativeStackScreenProps<RootStackParamList, Screen>;

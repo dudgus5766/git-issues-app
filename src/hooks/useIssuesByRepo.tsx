@@ -1,14 +1,21 @@
-import { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import axios, { AxiosError } from 'axios';
 
-import { ContentsQuery } from '../types';
-import { issuesState } from '../atom/contents';
+import { issuesState, issuesStateType } from '../atom/contents';
 import { getIssue } from '../api/getContents';
 
-export default function useIssuesByRepo(props: ContentsQuery) {
+type useIssuesByRepoProps = {
+  query: string;
+  per_page: number;
+  page: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+};
+
+export default function useIssuesByRepo(props: useIssuesByRepoProps) {
   const { query, per_page, page, setPage } = props;
   const [data, set] = useRecoilState(issuesState);
+
   const isLastPage = (totalCount: number, perPage: number, page: number) => {
     return totalCount <= perPage * page;
   };
@@ -45,7 +52,7 @@ export default function useIssuesByRepo(props: ContentsQuery) {
           isLast: isLastPage(response.data.total_count, per_page, page),
         });
       } else {
-        set(state => {
+        set((state: issuesStateType) => {
           return {
             ...state,
             items: state.items?.concat(response.data.items),
@@ -83,5 +90,6 @@ export default function useIssuesByRepo(props: ContentsQuery) {
 
   return {
     data,
+    refetch: fetchData,
   };
 }

@@ -1,10 +1,15 @@
 import octokit from './octokit';
+import { ContentsQuery } from '../types';
 
-//TODO:any type 설정하기
-export async function getRepository(props: any) {
+const endPoint = {
+  getSearchIssues: 'GET /search/issues',
+  getSearchRepositories: 'GET /search/repositories',
+};
+
+export async function getRepository(props: ContentsQuery) {
   const { query, per_page, page } = props;
 
-  const searchResult = await octokit.request('GET /search/repositories', {
+  const searchResult = await octokit.request(endPoint.getSearchRepositories, {
     q: query,
     per_page,
     page,
@@ -13,10 +18,10 @@ export async function getRepository(props: any) {
   return searchResult;
 }
 
-export async function getIssue(props: any) {
+export async function getIssue(props: ContentsQuery) {
   const { query, per_page, page } = props;
 
-  const searchResult = await octokit.request('GET /search/issues', {
+  const searchResult = await octokit.request(endPoint.getSearchIssues, {
     q: query,
     per_page,
     page,

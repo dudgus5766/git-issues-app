@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Container } from '../../components/common/CommonStyled';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
-import { searchWordState } from '../../atom/search';
-import useContents from '../../hooks/useContents';
-import Header from '../../components/Header';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../../types';
+
+import { Container } from '../../components/common/CommonStyled';
+import Header from '../../components/Header';
 import ContentsList from '../../components/ContentsList';
+import useContents from '../../hooks/useContents';
+import { searchWordState } from '../../atom/search';
 import { contentsState } from '../../atom/contents';
+import { RootStackParamList } from '../../../types';
 
 type SearchResultScreenNavigationProps = NativeStackScreenProps<
   RootStackParamList,
   'SearchResult'
 >;
 
-const LIMIT = 10;
+const LIMIT = 20;
 
 /**
  * [ 검색 결과 화면 ]

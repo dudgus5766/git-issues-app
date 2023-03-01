@@ -30,6 +30,5 @@ export const Name = styled(Text)`
   margin-bottom: 10px;
 `;
 
-export const OwnerName = styled(SubText)`
-  margin-left: 5px;
-`;
+export const OwnerName = styled(SubText)``;
+export const RepoNAme = styled(SubText)``;

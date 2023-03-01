@@ -12,6 +12,9 @@ type Props = PressableProps & {
 
 const activeOpacity = 0.6;
 
+/**
+ * [ Pressable ]
+ */
 export default function Pressable({ children, style, ...otherProps }: Props) {
   const _style = useCallback(
     ({ pressed }: { pressed: boolean }) => [

@@ -12,6 +12,9 @@ type SearchBarProps = {
   onSubmitEditing: () => void;
 };
 
+/**
+ * [ SeacrhBar ] : search bar
+ */
 export default function SearchBar({ onSubmitEditing }: SearchBarProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [searchWord, setSearchWord] = useRecoilState(searchWordState);

@@ -1,30 +1,33 @@
 import React, { useCallback } from 'react';
-import { FlatList, ListRenderItem, Text } from 'react-native';
+import { FlatList, ListRenderItem } from 'react-native';
 
-import { RepositoryType } from '../../types';
+import { IssueType } from '../../types';
 import IssuesItem from './IssuesItem';
 import { EmptyText, EmptyTextContainer } from '../../screens/Issues/styled';
 
 type IssuesListProps = {
-  data: RepositoryType[] | null;
+  data: IssueType[] | null;
   onLoadMore: () => void;
 };
 
+/**
+ * [ IssuesList ]
+ * 저장된 Repository의 Issue 리스트
+ */
 export default function IssuesList(props: IssuesListProps) {
   const { data, onLoadMore } = props;
 
-  const renderItem: ListRenderItem<RepositoryType> = ({ item }) => (
+  const renderItem: ListRenderItem<IssueType> = ({ item }) => (
     <IssuesItem item={item} />
   );
+
   const listEmptyComponent = () => (
     <EmptyTextContainer>
       <EmptyText>{'선택하신 repository에 Issue가 없습니다.'}</EmptyText>
     </EmptyTextContainer>
   );
-  const keyExtractor = useCallback(
-    (item: RepositoryType) => `Repo ${item.id}`,
-    [],
-  );
+
+  const keyExtractor = useCallback((item: IssueType) => `Repo ${item.id}`, []);
 
   return (
     <FlatList

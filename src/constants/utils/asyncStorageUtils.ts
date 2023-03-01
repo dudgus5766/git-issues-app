@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { RepoStateType } from '../../atom/contents';
+import { MarkedRepoValue } from '../../atom/contents';
 
 /**
  * #######################
@@ -21,16 +21,15 @@ export const asyncStorageStoreData = async (key: string, value: string) => {
 // Array 데이터 저장
 export const asyncStorageStoreArrayData = async (
   key: string,
-  value: RepoState,
+  value: MarkedRepoValue,
 ) => {
   try {
     const currentData = await asyncStorageGetData(key);
 
     if (currentData !== null) {
-      const resultArray = JSON.parse(currentData);
-      resultArray.push(value);
+      currentData.push(value);
 
-      await asyncStorageStoreData(key, JSON.stringify(resultArray));
+      await asyncStorageStoreData(key, JSON.stringify(currentData));
     } else {
       const newArray = [];
       newArray.push(value);
@@ -48,11 +47,10 @@ export const asyncStorageRemoveItemFromArray = async (
 ) => {
   try {
     const currentData = await asyncStorageGetData(key);
-    const currentDataToArray = JSON.parse(currentData);
-    if (currentDataToArray) {
+    if (currentData) {
       // key 파라미터에 해당하는 값을 가져와서 원하는 Value 삭제 진행
-      const resultArray = currentDataToArray.filter(
-        (item: RepoStateType) => item.repoName !== value,
+      const resultArray = currentData.filter(
+        (item: MarkedRepoValue) => item.repoName !== value,
       );
       // 필터링 완료 된 데이터 저장하기
       await asyncStorageStoreData(key, JSON.stringify(resultArray));
@@ -71,8 +69,8 @@ export const asyncStorageGetData = async (key: string) => {
     const value = await AsyncStorage.getItem(key);
 
     if (value !== null) {
-      // value previously stored
-      return value;
+      const data = JSON.parse(value);
+      return data;
     } else {
       return null;
     }

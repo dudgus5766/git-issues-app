@@ -1,12 +1,16 @@
 import * as React from 'react';
-import { IconContainer, IconImage } from './styled';
 import { IconSourceType } from '../../../types';
+
+import { IconContainer, IconImage } from './styled';
 
 type Props = {
   iconSource: IconSourceType;
   iconSize?: number;
 };
 
+/**
+ * [ Icon ] : 공통 사용 Icon component
+ */
 export default function Icon(props: Props) {
   const { iconSource, iconSize } = props;
 

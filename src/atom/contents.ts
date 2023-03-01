@@ -19,19 +19,18 @@ export const contentsState = atom<ContentsStateType>({
   },
 });
 
-export type repoValue = { repoName: string; ownerName: string };
+export type MarkedRepoValue = { repoName: string; ownerName: string };
+export type MarkedRepoStateType = MarkedRepoValue[];
 
-export type RepoStateType = repoValue[];
-
-export const repoState = atom<RepoStateType>({
-  key: 'repoState',
+export const markedRepoState = atom<MarkedRepoStateType>({
+  key: 'markedRepoState',
   default: [],
 });
 
-export const repoStateInfoState = selector({
-  key: 'repoStateInfoState',
+export const markedRepoInfoState = selector({
+  key: 'markedRepoInfoState',
   get: ({ get }) => {
-    const repoList = get(repoState);
+    const repoList = get(markedRepoState);
 
     let query = '';
     repoList.forEach(repository => {
@@ -51,7 +50,7 @@ export const repoStateInfoState = selector({
 export type issuesStateType = {
   items: IssueType[] | null;
   totalCount: number;
-  isLast: boolean; // 마지막 데이터인지, loadMore 여부 확인용
+  isLast: boolean;
 };
 
 export const issuesState = atom<issuesStateType>({

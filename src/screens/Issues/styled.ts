@@ -1,8 +1,6 @@
 import styled from 'styled-components/native';
-import { Container, SubText, Text } from '../../components/common/CommonStyled';
-import Pressable from '../../components/common/Pressable';
+import { SubText, Text } from '../../components/common/CommonStyled';
 import { COLORS } from '../../constants/Colors';
-import { HorizontalScrollView } from '../../components/common/CommonStyled/themed';
 
 export const MyRepoContainer = styled.View``;
 export const RepoNameContainer = styled.ScrollView`

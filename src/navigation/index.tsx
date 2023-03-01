@@ -1,23 +1,24 @@
-import { RootStackParamList, BottomTabParamList } from '../../types';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
 import HomeScreen from '../screens/Home';
 import SearchResultScreen from '../screens/SearchResult';
 import IssuesScreen from '../screens/Issues';
+import useCachedResources from '../hooks/useCachedResources';
 import Icon from '../components/common/Icon';
 import IconAssets from '../assets/icons/IconAssets';
 import { COLORS } from '../constants/Colors';
-import TabBtnHomeSelected from '../assets/icons/tabBtnHome/tabBtnHomeSelected.png';
+import { RootStackParamList, BottomTabParamList } from '../../types';
 
 /**
  * [ Navigation ]
  */
 export default function Navigation() {
+  const isLoaded = useCachedResources();
+
   return (
     <NavigationContainer>
-      <RootNavigator />
+      {isLoaded ? <RootNavigator /> : null}
     </NavigationContainer>
   );
 }

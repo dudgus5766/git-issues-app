@@ -5,7 +5,11 @@ import {
 } from '../constants/utils/asyncStorageUtils';
 import { AsyncStorageKeys } from '../constants/EnumTypes';
 import { useRecoilState } from 'recoil';
-import { RepoStateType, repoState } from '../atom/contents';
+import {
+  MarkedRepoStateType,
+  markedRepoState,
+  MarkedRepoValue,
+} from '../atom/contents';
 import { RepositoryType } from '../types';
 
 type useIsMarkedProps = {
@@ -14,7 +18,7 @@ type useIsMarkedProps = {
 
 export default function useIsMarked({ item }: useIsMarkedProps) {
   const [isMarked, setIsMarked] = useState(false);
-  const [data, set] = useRecoilState(repoState);
+  const [data, set] = useRecoilState(markedRepoState);
 
   const saveRepository = (repo: RepositoryType) => {
     const repoData = {
@@ -22,7 +26,7 @@ export default function useIsMarked({ item }: useIsMarkedProps) {
       ownerName: repo.owner?.login,
     };
 
-    set((state: RepoStateType) => state.concat(repoData));
+    set((state: MarkedRepoStateType) => state.concat(repoData));
     asyncStorageStoreArrayData(
       AsyncStorageKeys.SAVED_REPOSITORY_KEY,
       repoData,
@@ -32,7 +36,7 @@ export default function useIsMarked({ item }: useIsMarkedProps) {
 
   const deleteRepository = (name: string) => {
     const filteredRepo = data.filter(
-      (repo: RepositoryType) => repo.repoName !== name,
+      (repo: MarkedRepoValue) => repo.repoName !== name,
     );
     set(filteredRepo);
     asyncStorageRemoveItemFromArray(
@@ -44,7 +48,7 @@ export default function useIsMarked({ item }: useIsMarkedProps) {
 
   useEffect(() => {
     const isExist = data?.findIndex(
-      (repo: RepositoryType) => repo.repoName === item.name,
+      (repo: MarkedRepoValue) => repo.repoName === item.name,
     );
 
     if (isExist !== -1) {

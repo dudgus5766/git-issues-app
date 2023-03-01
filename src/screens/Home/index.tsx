@@ -1,20 +1,21 @@
 import React, { useCallback } from 'react';
 import {
   Keyboard,
-  Text,
   KeyboardAvoidingView,
   Platform,
   TouchableWithoutFeedback,
 } from 'react-native';
-import SearchBar from '../../components/common/SearchBar';
-import { CenteredContainer, GithubImg } from './styled';
-import { ImageAssets } from '../../assets';
+import { useSetRecoilState } from 'recoil';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { CompositeScreenProps, useFocusEffect } from '@react-navigation/native';
-import { BottomTabParamList, RootStackParamList } from '../../../types';
-import { useSetRecoilState } from 'recoil';
+
+import SearchBar from '../../components/common/SearchBar';
+import { ImageAssets } from '../../assets';
 import { searchWordState } from '../../atom/search';
+import { BottomTabParamList, RootStackParamList } from '../../../types';
+
+import { CenteredContainer, GithubImg } from './styled';
 
 type HomeScreenNavigationProps = CompositeScreenProps<
   BottomTabScreenProps<BottomTabParamList, 'Home'>,

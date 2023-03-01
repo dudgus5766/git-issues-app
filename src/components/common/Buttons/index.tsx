@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { GestureResponderEvent } from 'react-native';
-import { IconSourceType } from '../../../types';
+
 import Icon from '../Icon';
 import Pressable from '../Pressable';
+import { IconSourceType } from '../../../types';
+
 import { IconButtonContainer } from './styled';
 
 /**

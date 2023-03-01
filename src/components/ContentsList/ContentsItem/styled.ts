@@ -1,10 +1,9 @@
 import styled from 'styled-components/native';
 import FastImage from 'react-native-fast-image';
 import { SubText, Text } from '../../common/CommonStyled';
-import Pressable from '../../common/Pressable';
 import { COLORS } from '../../../constants/Colors';
 
-export const ContentsItemContainer = styled(Pressable)`
+export const ContentsItemContainer = styled.View`
   flex-direction: row;
   align-items: center;
   padding: 20px;

@@ -1,22 +1,23 @@
 import React from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { HeaderContainer, TitleText, TotalCountText } from './styled';
-import { IconAssets } from '../../assets';
 import IconButton from '../common/Buttons';
-import { Row } from '../common/CommonStyled';
 import { COLORS } from '../../constants/Colors';
-import { contentsState } from '../../atom/contents';
-/**
- * [ 상단 Header ]
- * 뒤로 가기 버튼 + 검색 창
- */
+import { IconAssets } from '../../assets';
+
+import { Row } from '../common/CommonStyled';
+import { HeaderContainer, TitleText, TotalCountText } from './styled';
+
 type HeaderProps = {
   title: string;
   totalCount: number;
   handleGoBack?: () => void;
 };
 
+/**
+ * [ 상단 Header ]
+ * 뒤로 가기 버튼 / title
+ */
 function Header(props: HeaderProps) {
   const { handleGoBack, title, totalCount } = props;
   const { top } = useSafeAreaInsets();

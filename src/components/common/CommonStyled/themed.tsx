@@ -6,6 +6,9 @@ import {
 } from 'react-native';
 import { COLORS } from '../../../constants/Colors';
 
+/**
+ * [ themed ] : 공통 사용 blocks
+ */
 export type TextProps = DefaultText['props'] & {
   color?: string;
   fontSize?: number;

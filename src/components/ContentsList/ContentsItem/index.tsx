@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import FastImage from 'react-native-fast-image';
 
-import { RepositoryType } from '../../../types';
-import Pressable from '../../common/Pressable';
+import IconButton from '../../common/Buttons';
+import { markedRepoInfoState } from '../../../atom/contents';
 import { ImageAssets } from '../../../assets';
+import IconAssets from '../../../assets/icons/IconAssets';
+import useIsMarked from '../../../hooks/useIsMarked';
+import { RepositoryType } from '../../../types';
+
 import {
   ContentsItemContainer,
   Thumbnail,
@@ -11,17 +16,6 @@ import {
   Name,
   OwnerName,
 } from './styled';
-import IconButton from '../../common/Buttons';
-import IconAssets from '../../../assets/icons/IconAssets';
-import {
-  asyncStorageGetData,
-  asyncStorageStoreArrayData,
-} from '../../../constants/utils/asyncStorageUtils';
-import { AsyncStorageKeys } from '../../../constants/EnumTypes';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import useIsMarked from '../../../hooks/useIsMarked';
-import { useRecoilValue } from 'recoil';
-import { repoState } from '../../../atom/contents';
 
 type ContentsItemProps = {
   item: RepositoryType;
@@ -29,13 +23,13 @@ type ContentsItemProps = {
 
 export default function ContentsItem(props: ContentsItemProps) {
   const { item } = props;
-  const data = useRecoilValue(repoState);
+  const { repoLength } = useRecoilValue(markedRepoInfoState);
   const { isMarked, saveRepository, deleteRepository } = useIsMarked({ item });
   const [showDefaultThumbnail, setShowDefaultThumbnail] =
     useState<boolean>(false);
 
   const onChangeMark = async () => {
-    if (data.length >= 4 && !isMarked) return;
+    if (repoLength >= 4 && !isMarked) return;
     if (!isMarked) {
       saveRepository(item);
     } else {

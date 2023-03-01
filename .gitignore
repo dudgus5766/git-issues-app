@@ -68,5 +68,5 @@ yarn-error.log
 .metro-health-check*
 
 # env
-.env/
-env.ts
+#.env/
+#env.ts
