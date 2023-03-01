@@ -2,6 +2,7 @@ import {
   Text as DefaultText,
   TextInput as DefaultTextInput,
   View as DefaultView,
+  ScrollView as DefaultScrollView,
 } from 'react-native';
 import { COLORS } from '../../../constants/Colors';
 
@@ -53,6 +54,19 @@ export function View(props: ViewProps) {
   return (
     <DefaultView
       style={[{ backgroundColor, borderColor }, style]}
+      {...otherProps}
+    />
+  );
+}
+
+export function HorizontalScrollView(props: ViewProps) {
+  const { style, ...otherProps } = props;
+
+  return (
+    <DefaultScrollView
+      style={style}
+      horizontal
+      // showsHorizontalScrollIndicator={false}
       {...otherProps}
     />
   );

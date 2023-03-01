@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import HomeScreen from '../screens/Home';
 import SearchResultScreen from '../screens/SearchResult';
-import MyRepositoryScreen from '../screens/MyRepository';
+import IssuesScreen from '../screens/Issues';
 import Icon from '../components/common/Icon';
 import IconAssets from '../assets/icons/IconAssets';
 import { COLORS } from '../constants/Colors';
@@ -72,10 +72,10 @@ function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name={'MyRepository'}
-        component={MyRepositoryScreen}
+        name={'Issues'}
+        component={IssuesScreen}
         options={{
-          tabBarLabel: '내 레포지토리',
+          tabBarLabel: '이슈',
           tabBarActiveTintColor: COLORS.MAIN_BLACK,
           tabBarInactiveTintColor: COLORS.SUB_GREY_02,
           tabBarLabelStyle: {

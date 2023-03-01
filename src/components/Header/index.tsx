@@ -1,12 +1,10 @@
 import React from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { HeaderContainer, SearchWordText, TotalCountText } from './styled';
+import { HeaderContainer, TitleText, TotalCountText } from './styled';
 import { IconAssets } from '../../assets';
 import IconButton from '../common/Buttons';
 import { Row } from '../common/CommonStyled';
-import { useRecoilValue } from 'recoil';
-import { searchWordState } from '../../atom/search';
 import { COLORS } from '../../constants/Colors';
 import { contentsState } from '../../atom/contents';
 /**
@@ -14,14 +12,13 @@ import { contentsState } from '../../atom/contents';
  * 뒤로 가기 버튼 + 검색 창
  */
 type HeaderProps = {
+  title: string;
+  totalCount: number;
   handleGoBack?: () => void;
 };
 
 function Header(props: HeaderProps) {
-  const { handleGoBack } = props;
-  const searchWord = useRecoilValue(searchWordState);
-  const { totalCount } = useRecoilValue(contentsState);
-
+  const { handleGoBack, title, totalCount } = props;
   const { top } = useSafeAreaInsets();
 
   return (
@@ -33,11 +30,9 @@ function Header(props: HeaderProps) {
             onPress={handleGoBack}
           />
         )}
-        {searchWord && (
-          <SearchWordText color={COLORS.MAIN_BLUE} fontSize={20}>
-            {searchWord}
-          </SearchWordText>
-        )}
+        <TitleText color={COLORS.MAIN_BLUE} fontSize={20}>
+          {title}
+        </TitleText>
       </Row>
       <Row center>
         <TotalCountText color={COLORS.SUB_GREY_01} fontSize={15}>

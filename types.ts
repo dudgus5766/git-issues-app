@@ -15,7 +15,7 @@ export type RootStackParamList = {
 
 export type BottomTabParamList = {
   Home: undefined;
-  MyRepository: undefined;
+  Issues: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

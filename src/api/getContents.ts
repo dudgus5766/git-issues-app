@@ -12,3 +12,15 @@ export async function getRepository(props: any) {
 
   return searchResult;
 }
+
+export async function getIssue(props: any) {
+  const { query, per_page, page } = props;
+
+  const searchResult = await octokit.request('GET /search/issues', {
+    q: query,
+    per_page,
+    page,
+  });
+
+  return searchResult;
+}

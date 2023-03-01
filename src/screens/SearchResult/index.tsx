@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Text } from 'react-native';
 import { Container } from '../../components/common/CommonStyled';
-import {
-  useRecoilValue,
-  useRecoilValueLoadable,
-  useResetRecoilState,
-} from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { searchWordState } from '../../atom/search';
 import useContents from '../../hooks/useContents';
 import Header from '../../components/Header';
@@ -28,6 +23,7 @@ export default function SearchResultScreen({
   navigation,
 }: SearchResultScreenNavigationProps) {
   const searchWord = useRecoilValue(searchWordState);
+  const { totalCount } = useRecoilValue(contentsState);
   const resetUserState = useResetRecoilState(contentsState);
 
   const [page, setPage] = useState<number>(1);
@@ -57,7 +53,11 @@ export default function SearchResultScreen({
 
   return (
     <Container>
-      <Header handleGoBack={onHandleGoBack} />
+      <Header
+        handleGoBack={onHandleGoBack}
+        totalCount={totalCount}
+        title={searchWord}
+      />
       <ContentsList data={data.items} onLoadMore={onLoadMore} />
     </Container>
   );

@@ -12,7 +12,7 @@ export const HeaderContainer = styled(View)`
   padding-bottom: 15px;
 `;
 
-export const SearchWordText = styled(Text)`
+export const TitleText = styled(Text)`
   margin-left: 10px;
   font-weight: 600;
 `;

@@ -44,7 +44,7 @@ export default function useIsMarked({ item }: useIsMarkedProps) {
 
   useEffect(() => {
     const isExist = data?.findIndex(
-      (repo: RepositoryType) => repo.ownerName === item.name,
+      (repo: RepositoryType) => repo.repoName === item.name,
     );
 
     if (isExist !== -1) {
