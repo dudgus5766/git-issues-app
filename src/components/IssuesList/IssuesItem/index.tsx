@@ -19,10 +19,11 @@ import { Row } from '../../common/CommonStyled';
 
 type IssuesItemProps = {
   item: RepositoryType;
+  onPress: () => void;
 };
 
 export default function IssuesItem(props: IssuesItemProps) {
-  const { item } = props;
+  const { item, onPress } = props;
   const [showDefaultThumbnail, setShowDefaultThumbnail] =
     useState<boolean>(false);
 

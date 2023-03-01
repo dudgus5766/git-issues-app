@@ -1,22 +1,31 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import axios, { AxiosError } from 'axios';
 
 import { ContentsQuery } from '../types';
 import { issuesState } from '../atom/contents';
-import { getIssue, getRepository } from '../api/getContents';
+import { getIssue } from '../api/getContents';
 
 export default function useIssuesByRepo(props: ContentsQuery) {
-  const { query, per_page, page } = props;
+  const { query, per_page, page, setPage } = props;
   const [data, set] = useRecoilState(issuesState);
   const isLastPage = (totalCount: number, perPage: number, page: number) => {
     return totalCount <= perPage * page;
   };
 
   const fetchData = useCallback(async () => {
+    if (!query) {
+      set({
+        items: [],
+        totalCount: 0,
+        isLast: false,
+      });
+      return;
+    }
+
     if (page === 1) {
       set({
-        items: null,
+        items: [],
         totalCount: 0,
         isLast: false,
       });
@@ -55,20 +64,24 @@ export default function useIssuesByRepo(props: ContentsQuery) {
       }
 
       set({
-        items: null,
+        items: [],
         totalCount: 0,
         isLast: false,
       });
     }
-  }, [set, query, page]);
+  }, [query, page]);
 
   useEffect(() => {
     if (data.isLast) return;
     fetchData();
-  }, [query, page]);
+  }, [page]);
+
+  useEffect(() => {
+    setPage(1);
+    fetchData();
+  }, [query]);
 
   return {
     data,
-    refetch: fetchData,
   };
 }

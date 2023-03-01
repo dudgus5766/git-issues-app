@@ -8,6 +8,7 @@ import TabBtnHome from './tabBtnHome/tabBtnHome.png';
 import TabBtnHomeSelected from './tabBtnHome/tabBtnHomeSelected.png';
 import TabBtnProfile from './tabBtnProfile/tabBtnProfile.png';
 import TabBtnProfileSelected from './tabBtnProfile/tabBtnProfileSelected.png';
+import deleteItem from './deleteItem/deleteItem.png';
 
 export default {
   ArrowBack,
@@ -20,4 +21,5 @@ export default {
   TabBtnHomeSelected,
   TabBtnProfile,
   TabBtnProfileSelected,
+  deleteItem,
 } as const;

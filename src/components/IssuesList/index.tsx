@@ -26,8 +26,6 @@ export default function IssuesList(props: IssuesListProps) {
     [],
   );
 
-  const getItemLayout = () => {};
-
   return (
     <FlatList
       removeClippedSubviews
@@ -37,7 +35,6 @@ export default function IssuesList(props: IssuesListProps) {
       keyExtractor={keyExtractor}
       contentContainerStyle={{ marginTop: 5 }}
       ListEmptyComponent={listEmptyComponent}
-      // getItemLayout={getItemLayout}
       onEndReached={onLoadMore}
     />
   );

@@ -19,7 +19,7 @@ export const contentsState = atom<ContentsStateType>({
   },
 });
 
-type repoValue = { repoName: string; ownerName: string };
+export type repoValue = { repoName: string; ownerName: string };
 
 export type RepoStateType = repoValue[];
 
@@ -55,7 +55,7 @@ export type issuesStateType = {
 };
 
 export const issuesState = atom<issuesStateType>({
-  key: 'contentsState',
+  key: 'issuesState',
   default: {
     items: null,
     totalCount: 0,
