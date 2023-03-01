@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FastImage from 'react-native-fast-image';
 
 import { RepositoryType } from '../../../types';
@@ -13,8 +13,15 @@ import {
 } from './styled';
 import IconButton from '../../common/Buttons';
 import IconAssets from '../../../assets/icons/IconAssets';
-import Save from '../../../assets/icons/save/save.png';
-import SaveBorder from '../../../assets/icons/save/save_border.png';
+import {
+  asyncStorageGetData,
+  asyncStorageStoreArrayData,
+} from '../../../constants/utils/asyncStorageUtils';
+import { AsyncStorageKeys } from '../../../constants/EnumTypes';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import useIsMarked from '../../../hooks/useIsMarked';
+import { useRecoilValue } from 'recoil';
+import { repoState } from '../../../atom/contents';
 
 type ContentsItemProps = {
   item: RepositoryType;
@@ -22,15 +29,22 @@ type ContentsItemProps = {
 
 export default function ContentsItem(props: ContentsItemProps) {
   const { item } = props;
-
+  const data = useRecoilValue(repoState);
+  const { isMarked, saveRepository, deleteRepository } = useIsMarked({ item });
   const [showDefaultThumbnail, setShowDefaultThumbnail] =
     useState<boolean>(false);
 
-  //TODO: repository asyncStorage 저장하기
-  console.log('item >>>', item);
+  const onChangeMark = async () => {
+    if (data.length >= 4 && !isMarked) return;
+    if (!isMarked) {
+      saveRepository(item);
+    } else {
+      deleteRepository(item.name);
+    }
+  };
+
   return (
     <ContentsItemContainer>
-      {/*<Pressable style={{ flex: 1, flexDirection: 'row' }}>*/}
       <Thumbnail
         source={
           showDefaultThumbnail
@@ -49,10 +63,9 @@ export default function ContentsItem(props: ContentsItemProps) {
         <OwnerName>{item.owner?.login}</OwnerName>
       </InfoContainer>
       <IconButton
-        iconSource={IconAssets.SaveBorder}
-        onPress={() => console.log('go to storage!')}
+        iconSource={!isMarked ? IconAssets.SaveBorder : IconAssets.Save}
+        onPress={onChangeMark}
       />
-      {/*</Pressable>*/}
     </ContentsItemContainer>
   );
 }

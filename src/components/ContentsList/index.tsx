@@ -2,18 +2,18 @@ import React, { useCallback } from 'react';
 import { FlatList, ListRenderItem } from 'react-native';
 
 import { RepositoryType } from '../../types';
-import ContentsItem from './ContentItem';
+import ContentsItem from './ContentsItem';
 
 type ContentsListProps = {
   data: RepositoryType[] | null;
+  onLoadMore: () => void;
 };
 
 export default function ContentsList(props: ContentsListProps) {
-  const { data } = props;
-  console.log('data >>>', data);
-  const renderItem: ListRenderItem<RepositoryType> = useCallback(
-    ({ item }) => <ContentsItem item={item} />,
-    [data],
+  const { data, onLoadMore } = props;
+
+  const renderItem: ListRenderItem<RepositoryType> = ({ item }) => (
+    <ContentsItem item={item} />
   );
 
   const keyExtractor = useCallback(
@@ -32,7 +32,7 @@ export default function ContentsList(props: ContentsListProps) {
       keyExtractor={keyExtractor}
       contentContainerStyle={{ marginTop: 5 }}
       // getItemLayout={getItemLayout}
-      // onEndReached={onLoadMore}
+      onEndReached={onLoadMore}
     />
   );
 }

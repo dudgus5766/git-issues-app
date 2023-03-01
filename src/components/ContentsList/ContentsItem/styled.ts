@@ -5,7 +5,6 @@ import Pressable from '../../common/Pressable';
 import { COLORS } from '../../../constants/Colors';
 
 export const ContentsItemContainer = styled(Pressable)`
-  flex: 1;
   flex-direction: row;
   align-items: center;
   padding: 20px;
